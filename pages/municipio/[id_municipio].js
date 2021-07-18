@@ -7,6 +7,7 @@ import {
 } from 'reactstrap';
 import List from '../../components/List';
 import Search from '../../components/Search';
+import LoaderSpiner from '../../components/LoaderSpiner';
 
 const GET_MUNICIPIO_PUBLICIACAO = gql`
   query($id: ID!) {
@@ -33,11 +34,7 @@ function Municipio(props) {
     variables: { id: router.query.id_municipio },
   });
   if (error) return (<Alert color="danger">{ JSON.stringify(error, null, 2) }</Alert>);
-  if (loading) return (
-    <>
-      <Spinner style={{ width: '3rem', height: '3rem' }} />{' '}
-    </>
-  );   
+  if (loading) return <LoaderSpiner />;
   if (data) {
     const { municipio } = data;
     return (
